@@ -10,10 +10,19 @@
 return [
     'id' => 'test',
     'basePath' => realpath(__DIR__ . '/../'),
+    'bootstrap' => [
+        'debug'
+    ],
     'components' => [
          'urlManager' => [
              'enablePrettyUrl' => true,
              'showScriptName' => false
-         ]
+         ],
+        'request' => [
+            'cookieValidationKey' => 'sd.jklhtfn;svmkjsdmkjlggh,dsoigh,'
+        ]
     ],
+    'modules' => [
+        'debug' => 'yii\debug\Module'
+    ]
 ];
