@@ -22,6 +22,9 @@ return [
             'cookieValidationKey' => 'sd.jklhtfn;svmkjsdmkjlggh,dsoigh,'
         ],
         'db' => require (__DIR__ . '/db.php'),
+        'user' => [
+            'identityClass' => 'app\models\UserIdentity',
+        ],
     ],
     'modules' => [
         'debug' => 'yii\debug\Module'
