@@ -20,7 +20,8 @@ return [
          ],
         'request' => [
             'cookieValidationKey' => 'sd.jklhtfn;svmkjsdmkjlggh,dsoigh,'
-        ]
+        ],
+        'db' => require (__DIR__ . '/db.php'),
     ],
     'modules' => [
         'debug' => 'yii\debug\Module'
