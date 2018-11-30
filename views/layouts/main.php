@@ -26,10 +26,16 @@ $this->beginPage();
                     'class' => 'navbar-default navbar-fixed-top',
               ]
           ]);
-        $menu = [
-            ['label' => 'Join', 'url' => ['/user/join']],
-            ['label' => 'Login', 'url' => ['/user/login']]
-        ];
+        if (Yii::$app->user->isGuest)
+            $menu = [
+                ['label' => 'Join', 'url' => ['/user/join']],
+                ['label' => 'Login', 'url' => ['/user/login']]
+            ];
+        else
+            $menu = [
+                ['label' => Yii::$app->user->getId()],
+                ['label' => 'Logout', 'url' => ['/user/logout']]
+            ];
 
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
