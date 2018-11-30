@@ -8,6 +8,7 @@
  */
 
 namespace app\models;
+use Faker\Factory;
 use yii\db\ActiveRecord;
 
 /**
@@ -33,8 +34,9 @@ class UserRecord extends ActiveRecord
      */
     public function setTestUser()
     {
-        $this->name = "John";
-        $this->email = "Drakyla@spaces.ru";
-        $this->passhash = "qwerty";
+        $faker = Factory::create();
+        $this->name = $faker->name;
+        $this->email = $faker->email;
+        $this->passhash = $faker->password;
     }
 }
