@@ -31,4 +31,11 @@ class UserJoinForm extends Model
             ['password2', 'compare', 'compareAttribute' => 'password']
         ];
     }
+
+    public function setUserRecord(UserRecord $userRecord)
+    {
+        $this->name = $userRecord->name;
+        $this->email = $userRecord->email;
+        $this->password = $this->password2 = "qwerty";
+    }
 }
