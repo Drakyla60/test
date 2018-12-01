@@ -43,7 +43,7 @@ class UserRecord extends ActiveRecord
         $faker = Factory::create();
         $this->name = $faker->name;
         $this->email = $faker->email;
-        $this->passhash = $faker->password;
+        $this->setPassword($faker->password);
     }
 
     public static function existsEmail($email)
@@ -55,7 +55,12 @@ class UserRecord extends ActiveRecord
     {
         $this->name = $userJoinForm->name;
         $this->email =  $userJoinForm->email;
-        $this->passhash = $userJoinForm->password;
+        $this->setPassword($userJoinForm->password);
         $this->status = 2;
+    }
+
+    public function setPassword($password)
+    {
+        $this->passhash = $password;
     }
 }
