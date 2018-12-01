@@ -51,7 +51,9 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-    $userLoginForm = new UserLoginForm();
+        if (Yii::$app->request->isPost)
+            return $this->actionLoginPost();
+        $userLoginForm = new UserLoginForm();
         return $this->render('login', [
             'userLoginForm' => $userLoginForm
         ]);
@@ -61,6 +63,19 @@ class UserController extends Controller
     {
         Yii::$app->user->logout();
         return $this->redirect("/");
+    }
+
+    private function actionLoginPost()
+    {
+        $userLoginForm = new UserLoginForm();
+        if ($userLoginForm->load(Yii::$app->request->post()))
+            if ($userLoginForm->validate()) {
+                $userLoginForm->login();
+                return $this->redirect("/");
+            }
+        return $this->render('login', [
+            'userLoginForm' => $userLoginForm
+        ]);
     }
 
 

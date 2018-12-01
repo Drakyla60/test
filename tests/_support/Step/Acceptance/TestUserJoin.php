@@ -32,7 +32,7 @@ class TestUserJoin extends \AcceptanceTester
     {
         $I = $this;
         $I->amOnPage("/user/login");
-        $I->see("Log In");
+        $I->see("Login");
         $I->fillField("UserLoginForm[email]", $user["email"]);
         $I->fillField("UserLoginForm[password]", $user["password"]);
         $I->click("Enter");

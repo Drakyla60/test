@@ -15,7 +15,7 @@ $I->joinUser($user1);
 $I->joinUser($user2);
 
 $I->joinUser($user1);
-$I->see("T^his e-mail already exists");
+$I->see("This e-mail already exists");
 
 $I->loginUser($user1);
 $I->isUserLogged($user1);

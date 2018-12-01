@@ -29,6 +29,11 @@ class UserRecord extends ActiveRecord
         return "user";
     }
 
+    public static function findUserByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
+    }
+
 
     /**
      *
