@@ -17,7 +17,7 @@ class UserLoginForm extends Model
 {
     public $email;
     public $password;
-    private $_userRecord;
+    public $_userRecord;
 
     public function rules()
     {
@@ -30,6 +30,9 @@ class UserLoginForm extends Model
         ];
     }
 
+    /**
+     *
+     */
     public function errorIfEmailNotFound()
     {
         $this->_userRecord = UserRecord::findUserByEmail($this->email);
@@ -38,11 +41,14 @@ class UserLoginForm extends Model
                 'This e-mail does not registered');
     }
 
+    /**
+     *
+     */
     public function errorIfPasswordWrong()
     {
         if ($this->hasErrors())
             return;
-        if ($this->_userRecord->passhash != $this->password)
+        if (!$this->_userRecord->validatePassword($this->password))
             $this->addError('password', 'Wrong password');
     }
 

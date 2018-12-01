@@ -18,7 +18,9 @@ class PasswordHasherTest extends \Codeception\Test\Unit
     {
     }
 
-    // tests
+    /**
+     * @throws \yii\base\Exception
+     */
     public function testPasswordIsHash()
     {
         $my_password = "qwerty123";
@@ -51,12 +53,12 @@ class PasswordHasherTest extends \Codeception\Test\Unit
 
         $first_hash = $userRecord_local->passhash;
 
-        $userRecord_local->name .= rand(1, 9);
+        $userRecord_local->name .= mt_rand(1, 9);
         $userRecord_local->save();
 
         $this->assertEquals($first_hash, $userRecord_local->passhash);
 
         $userRecord_found = UserRecord::findOne($userRecord_local->id);
-        $this->assertEquals($first_hash, $userRecord_found);
+        $this->assertEquals($first_hash, $userRecord_found->passhash);
     }
 }

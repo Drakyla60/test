@@ -9,6 +9,7 @@
 
 namespace app\models;
 use Faker\Factory;
+use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -34,9 +35,8 @@ class UserRecord extends ActiveRecord
         return static::findOne(['email' => $email]);
     }
 
-
     /**
-     *
+     * @throws \yii\base\Exception
      */
     public function setTestUser()
     {
@@ -50,7 +50,11 @@ class UserRecord extends ActiveRecord
     {
         return 0 < static::find()->where(['email' => $email])->count();
     }
-
+    
+    /**
+     * @param UserJoinForm $userJoinForm
+     * @throws \yii\base\Exception
+     */
     public function setUserJoinForm(UserJoinForm $userJoinForm)
     {
         $this->name = $userJoinForm->name;
@@ -59,8 +63,21 @@ class UserRecord extends ActiveRecord
         $this->status = 2;
     }
 
+    /**
+     * @param $password
+     * @throws \yii\base\Exception
+     */
     public function setPassword($password)
     {
-        $this->passhash = $password;
+        $this->passhash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * @param $password
+     * @return bool
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->passhash);
     }
 }
