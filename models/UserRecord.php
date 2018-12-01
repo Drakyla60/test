@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string name
  * @property string email
  * @property string passhash
+ * @property int status
  * @package app\models
  */
 class UserRecord extends ActiveRecord
@@ -43,5 +44,13 @@ class UserRecord extends ActiveRecord
     public static function existsEmail($email)
     {
         return 0 < static::find()->where(['email' => $email])->count();
+    }
+
+    public function setUserJoinForm(UserJoinForm $userJoinForm)
+    {
+        $this->name = $userJoinForm->name;
+        $this->email =  $userJoinForm->email;
+        $this->passhash = $userJoinForm->password;
+        $this->status = 2;
     }
 }
