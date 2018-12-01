@@ -4,7 +4,7 @@
 ?>
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3>Login</h3>
+        <h1>Login</h1>
     </div>
     <div class="panel-body">
         <?php $form = ActiveForm::begin(['id' => 'user-login-form']);?>

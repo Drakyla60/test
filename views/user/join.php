@@ -4,7 +4,7 @@
 ?>
 <div class="panel panel-warning">
     <div class="panel-heading">
-        <h3>Join Us</h3>
+        <h1>Join Us</h1>
     </div>
     <div class="panel-body">
 

@@ -12,7 +12,6 @@ class TestUserJoin extends \AcceptanceTester
             "email" => $faker->email,
             "password" => $faker->city
         ];
-        print_r($user);
         return $user;
     }
 

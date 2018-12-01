@@ -33,7 +33,7 @@ $this->beginPage();
             ];
         else
             $menu = [
-                ['label' => Yii::$app->user->getId()],
+                ['label' => Yii::$app->user->identity->name],
                 ['label' => 'Logout', 'url' => ['/user/logout']]
             ];
 

@@ -23,7 +23,8 @@ class UserLoginForm extends Model
             ['email', 'required'],
             ['password', 'required'],
             ['email', 'email'],
-            ['email', 'errorIfEmailNotFound']
+            ['email', 'errorIfEmailNotFound'],
+            ['password', 'errorIfPasswordWrong']
         ];
     }
 
@@ -33,6 +34,15 @@ class UserLoginForm extends Model
         if ($userRecord->email != $this->email)
             $this->addError('email',
                 'This e-mail does not registered');
+    }
+
+    public function errorIfPasswordWrong()
+    {
+        if ($this->hasErrors())
+            return;
+        $userRecord = UserRecord::findUserByEmail($this->email);
+        if ($userRecord->passhash != $this->password)
+            $this->addError('password', 'Wrong password');
     }
 
     public function login()

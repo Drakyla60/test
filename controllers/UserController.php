@@ -43,7 +43,6 @@ class UserController extends Controller
                 $userRecord->save();
             }
 
-
         return $this->render('join', [
             'userJoinForm' => $userJoinForm
         ]);
