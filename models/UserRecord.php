@@ -39,4 +39,9 @@ class UserRecord extends ActiveRecord
         $this->email = $faker->email;
         $this->passhash = $faker->password;
     }
+
+    public static function existsEmail($email)
+    {
+        return 0 < static::find()->where(['email' => $email])->count();
+    }
 }
