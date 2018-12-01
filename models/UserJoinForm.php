@@ -28,7 +28,8 @@ class UserJoinForm extends Model
             ['name', 'string', 'min' => 3, 'max' => 30],
             ['email', 'email'],
             ['password', 'string', 'min' => 6],
-            ['password2', 'compare', 'compareAttribute' => 'password']
+            ['password2', 'compare', 'compareAttribute' => 'password'],
+            ['email' , 'errorIfEmailUsed']
         ];
     }
 
@@ -37,5 +38,12 @@ class UserJoinForm extends Model
         $this->name = $userRecord->name;
         $this->email = $userRecord->email;
         $this->password = $this->password2 = "qwerty";
+    }
+
+    public function errorIfEmailUsed()
+    {
+        if(0 == UserRecord::find()->where(['email' => $this->email])->count())
+            return;
+        $this->addError('email', 'This e-mail already exists');
     }
 }
