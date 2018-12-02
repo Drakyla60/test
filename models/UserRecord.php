@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  * @property string email
  * @property string passhash
  * @property int status
+ * @property string authokey
  * @package app\models
  */
 class UserRecord extends ActiveRecord
@@ -50,7 +51,7 @@ class UserRecord extends ActiveRecord
     {
         return 0 < static::find()->where(['email' => $email])->count();
     }
-    
+
     /**
      * @param UserJoinForm $userJoinForm
      * @throws \yii\base\Exception
@@ -60,6 +61,7 @@ class UserRecord extends ActiveRecord
         $this->name = $userJoinForm->name;
         $this->email =  $userJoinForm->email;
         $this->setPassword($userJoinForm->password);
+        $this->authokey = Yii::$app->security->generateRandomString(100);
         $this->status = 2;
     }
 
@@ -70,6 +72,7 @@ class UserRecord extends ActiveRecord
     public function setPassword($password)
     {
         $this->passhash = Yii::$app->security->generatePasswordHash($password);
+        $this->authokey = Yii::$app->security->generateRandomString(100);
     }
 
     /**
